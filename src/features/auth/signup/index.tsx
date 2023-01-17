@@ -1,9 +1,13 @@
 import { SignUpInput } from './SignUpInput';
-import { FormEvent } from 'react';
+import React, { FormEvent, useEffect } from 'react';
 import * as yup from "yup";
-import { useForm } from 'react-hook-form';
+import { FieldValue, FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLazySignUpQuery } from '../../../store/base.api';
+import { SignUpPasswordInput } from './SignUpPasswordInput';
+import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
+import { useNavigate } from 'react-router-dom';
+import { useActions, useAppSelector } from '../../../store/hooks';
 
 const signUpSchema = yup.object().shape({
 	email: yup
@@ -23,27 +27,34 @@ const signUpSchema = yup.object().shape({
 })
 
 export const SignUp = () => {
-	const [signUpMethod, {isLoading, data}] = useLazySignUpQuery();
-
-
+	const [signUpMethod, {isLoading, data, isError, error, isSuccess}] = useLazySignUpQuery();
+	const {addToken} = useActions();
+	const navigate = useNavigate()
 	const { register, handleSubmit, formState: { errors } } = useForm({
 		mode: "onChange",
 		resolver: yupResolver(signUpSchema)
 	});
 
-	const handleSignUp = (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
+	const handleSignUp = (data: FieldValues) => {
 		signUpMethod({
-			email: "test@mail.ru",
-			username: "test",
-			password: "test"
+			email: data.email,
+			username: data.name,
+			password: data.password
 		})
 	}
+	useEffect(() => {
+		if (isSuccess && data) {
+			addToken(data.id_token);
+			navigate({
+				pathname: '../../'
+			})
+		}
+	}, [isSuccess])
 
 	return (
-		<form onSubmit={handleSignUp} className="border rounded p-10 shadow bg-white  w-[500px]">
+		<form className="border rounded p-10 shadow bg-white  w-[500px]">
 			<h2 className="mb-8 text-2xl">
-				Sign in
+				Sign up
 			</h2>
 			<SignUpInput
 				register={register('email', { required: true })}
@@ -55,24 +66,33 @@ export const SignUp = () => {
 				label="Name"
 				error={errors?.name?.message?.toString()}
 			/>
-			<SignUpInput
+			<SignUpPasswordInput
 				register={register('password', { required: true })}
 				label="Password"
 				error={errors?.password?.message?.toString()}
-				type="password"
 			/>
-			<SignUpInput
+			<SignUpPasswordInput
 				register={register('passwordConfirm', { required: true })}
 				label="Confirm Password"
 				error={errors?.passwordConfirm?.message?.toString()}
-				type="password"
 			/>
-			<button className="rounded border bg-blue-500 w-full p-2 text-white mt-2">
+			{
+				isError &&
+                <Alert className="mb-5" severity="error">
+                    <AlertTitle>Error</AlertTitle>
+	                {
+		                //@ts-ignore
+		                error?.data
+	                }
+                </Alert>
+			}
+
+			<LoadingButton onClick={handleSubmit(handleSignUp)} fullWidth loading={isLoading} variant="contained">
 				Sign up
-			</button>
+			</LoadingButton>
 			<div className="mt-4">
 				<span className="text-gray-500 text-sm">
-					Already have an account? <br/> <a href="/auth/signin" className="underline">Sign up</a>
+					Already have an account? <br/> <a href="/auth/signin" className="underline">Sign in</a>
 				</span>
 			</div>
 		</form>

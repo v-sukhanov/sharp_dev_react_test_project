@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { baseApi } from './base.api';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { tokenReducer } from './token.slice';
 
 export const store = configureStore({
 	reducer: {
-		[baseApi.reducerPath]: baseApi.reducer
+		[baseApi.reducerPath]: baseApi.reducer,
+		token: tokenReducer
 	},
 	middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware)
 });
@@ -18,3 +20,4 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 	unknown,
 	Action<string>
 >;
+setupListeners(store.dispatch)
