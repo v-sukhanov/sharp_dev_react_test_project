@@ -115,7 +115,7 @@ export const ApplicationBar = () => {
 						open={Boolean(anchorElNav)}
 						onClose={handleCloseNavMenu}
 						sx={{
-							display: { xs: 'block', md: 'none' },
+							display: { xs: 'block', md: 'none', xl: 'none' },
 						}}
 					>
 						{pages.map((page) => (
@@ -125,22 +125,6 @@ export const ApplicationBar = () => {
 						))}
 					</Menu>
 				</Box>
-				<Typography
-					variant="h5"
-					noWrap
-					component="a"
-					href=""
-					sx={{
-						mr: 2,
-						display: { xs: 'flex', md: 'none' },
-						flexGrow: 1,
-						fontWeight: 700,
-						color: 'inherit',
-						textDecoration: 'none',
-					}}
-				>
-					Internal money
-				</Typography>
 				<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 					{pages.map((page) => (
 						<Button

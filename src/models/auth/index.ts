@@ -25,3 +25,30 @@ export interface IUserInfoResponse {
 	email: string;
 	balance: string;
 }
+
+export interface IUsersRequest {
+	filter: string;
+}
+
+
+export interface IUser {
+	id: string;
+	name: string
+}
+
+export interface ICreateTransactionRequest {
+	name: string;
+	amount: number;
+}
+
+export interface ICreateTransactionResponse {
+	trans_token: ICreateTransactionToken;
+}
+
+export interface ICreateTransactionToken {
+	id: string;
+	date:string;
+	username: string;
+	amount: number;
+	balance: number;
+}

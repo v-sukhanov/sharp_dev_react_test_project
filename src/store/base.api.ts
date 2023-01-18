@@ -21,13 +21,6 @@ export const baseApi = createApi({
 				body: request,
 				method: 'post'
 			})
-		}),
-		userInfo: build.query<ISignInResponse, ISignInRequest>({
-			query: (request: ISignInRequest) => ({
-				url: '/sessions/create',
-				body: request,
-				method: 'post'
-			})
 		})
 	})
 })

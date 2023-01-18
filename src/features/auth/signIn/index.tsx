@@ -4,7 +4,7 @@ import React, { FormEvent, useEffect } from 'react';
 import { SignUpInput } from '../signup/SignUpInput';
 import * as yup from 'yup';
 import { SignUpPasswordInput } from '../signup/SignUpPasswordInput';
-import { LoadingButton } from '@mui/lab';
+import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
 import { useLazySignInQuery, useLazySignUpQuery } from '../../../store/base.api';
 import { useActions } from '../../../store/hooks';
 import { useNavigate } from 'react-router-dom';
@@ -21,7 +21,7 @@ const signInSchema = yup.object().shape({
 })
 
 export const SignIn = () => {
-	const [signInMethod, {isLoading, data, isError, error, isSuccess}] = useLazySignInQuery();
+	const [signInMethod, {isLoading, isError, error}] = useLazySignInQuery();
 	const {addToken} = useActions();
 	const navigate = useNavigate()
 
@@ -30,21 +30,20 @@ export const SignIn = () => {
 		resolver: yupResolver(signInSchema)
 	});
 
-	const handleSignUp = (data: FieldValues) => {
+	const handleSignIn = (data: FieldValues) => {
 		signInMethod({
 			email: data.email,
 			password: data.password
-		})
-	}
-
-	useEffect(() => {
-		if (isSuccess && data) {
-			addToken(data.id_token);
-			navigate({
-				pathname: '../../'
+		}).unwrap()
+			.then((payload) => {
+				if (payload) {
+					addToken(payload.id_token);
+					navigate({
+						pathname: '../../'
+					})
+				}
 			})
-		}
-	}, [isSuccess])
+	}
 
 	return (
 		<form className="border rounded p-10 shadow bg-white  w-[500px]">
@@ -61,7 +60,17 @@ export const SignIn = () => {
 				label="Password"
 				error={errors?.password?.message?.toString()}
 			/>
-			<LoadingButton onClick={handleSubmit(handleSignUp)} fullWidth loading={isLoading} variant="contained">
+			{
+				isError &&
+                <Alert className="mb-5" severity="error">
+                    <AlertTitle>Error</AlertTitle>
+					{
+						//@ts-ignore
+						error?.data
+					}
+                </Alert>
+			}
+			<LoadingButton onClick={handleSubmit(handleSignIn)} fullWidth loading={isLoading} variant="contained">
 				Sign in
 			</LoadingButton>
 			<div className="mt-4">

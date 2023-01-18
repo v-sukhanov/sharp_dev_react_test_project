@@ -4,7 +4,7 @@ import { tokenActions } from './token.slice';
 import { bindActionCreators } from '@reduxjs/toolkit';
 
 const actions = {
-	...tokenActions
+	...tokenActions,
 }
 
 export const useActions = () => {

@@ -27,7 +27,7 @@ const signUpSchema = yup.object().shape({
 })
 
 export const SignUp = () => {
-	const [signUpMethod, {isLoading, data, isError, error, isSuccess}] = useLazySignUpQuery();
+	const [signUpMethod, {isLoading, isError, error}] = useLazySignUpQuery();
 	const {addToken} = useActions();
 	const navigate = useNavigate()
 	const { register, handleSubmit, formState: { errors } } = useForm({
@@ -40,16 +40,17 @@ export const SignUp = () => {
 			email: data.email,
 			username: data.name,
 			password: data.password
-		})
-	}
-	useEffect(() => {
-		if (isSuccess && data) {
-			addToken(data.id_token);
-			navigate({
-				pathname: '../../'
+		}).unwrap()
+			.then((payload) => {
+				if (payload) {
+					addToken(payload.id_token);
+					navigate({
+						pathname: '../../'
+					})
+				}
 			})
-		}
-	}, [isSuccess])
+	}
+
 
 	return (
 		<form className="border rounded p-10 shadow bg-white  w-[500px]">
