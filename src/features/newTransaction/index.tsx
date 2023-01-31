@@ -5,12 +5,12 @@ import {
 	useLazyUserInfoQuery,
 	useLazyUsersQuery,
 	useUserInfoQuery
-} from '../../store/protected.api';
-import { IUser } from '../../models/auth';
+} from '../../api/protected.api';
 import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
 import { NewTransactionSearch } from './NewTransactionSearch';
 import { NewTransactionAmountInput } from './NewTransactionAmountInput';
 import { useQueryParams } from '../../hooks/queryParams';
+import { IUser } from '../../models/user';
 
 export const NewTransaction = () => {
 	const queryParams = useQueryParams();

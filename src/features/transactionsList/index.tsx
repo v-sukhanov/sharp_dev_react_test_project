@@ -1,7 +1,6 @@
-import { useGetTransactionQuery, useLazyGetTransactionQuery } from '../../store/protected.api';
+import { useLazyGetTransactionQuery } from '../../api/protected.api';
 import React, { useEffect } from 'react';
 import {
-	Icon,
 	IconButton,
 	Paper,
 	Table,
@@ -11,7 +10,7 @@ import {
 	TableHead,
 	TableRow
 } from '@mui/material';
-import { Replay, Visibility, VisibilityOff } from '@mui/icons-material';
+import { Replay } from '@mui/icons-material';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
 

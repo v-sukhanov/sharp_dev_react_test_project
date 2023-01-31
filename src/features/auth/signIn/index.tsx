@@ -5,7 +5,7 @@ import { SignUpInput } from '../signup/SignUpInput';
 import * as yup from 'yup';
 import { SignUpPasswordInput } from '../signup/SignUpPasswordInput';
 import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
-import { useLazySignInQuery, useLazySignUpQuery } from '../../../store/base.api';
+import { useLazySignInQuery, useLazySignUpQuery } from '../../../api/base.api';
 import { useActions } from '../../../store/hooks';
 import { useNavigate } from 'react-router-dom';
 

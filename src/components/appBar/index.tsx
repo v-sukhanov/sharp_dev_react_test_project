@@ -12,7 +12,7 @@ import {
 import React, { useEffect } from 'react';
 import { useActions } from '../../store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { useLazyUserInfoQuery, useUserInfoQuery } from '../../store/protected.api';
+import { useLazyUserInfoQuery, useUserInfoQuery } from '../../api/protected.api';
 import { Menu as MenuIcon } from '@mui/icons-material';
 
 const pages = [

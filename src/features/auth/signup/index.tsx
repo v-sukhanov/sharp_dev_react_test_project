@@ -3,7 +3,7 @@ import React, { FormEvent, useEffect } from 'react';
 import * as yup from "yup";
 import { FieldValue, FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useLazySignUpQuery } from '../../../store/base.api';
+import { useLazySignUpQuery } from '../../../api/base.api';
 import { SignUpPasswordInput } from './SignUpPasswordInput';
 import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';

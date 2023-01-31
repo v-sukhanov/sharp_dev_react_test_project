@@ -1,8 +1,8 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { baseApi } from './base.api';
+import { baseApi } from '../api/base.api';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { tokenReducer } from './token.slice';
-import { protectedApi } from './protected.api';
+import { protectedApi } from '../api/protected.api';
 
 export const store = configureStore({
 	reducer: {

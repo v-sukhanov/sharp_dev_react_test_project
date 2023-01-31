@@ -1,17 +1,16 @@
 import { BaseQueryApi, BaseQueryFn, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
-	ICreateTransactionRequest, ICreateTransactionResponse, ICreateTransactionToken,
 	ISignInRequest,
 	ISignInResponse,
 	ISignUpRequest,
-	ISignUpResponse, IUser,
-	IUserInfoResponse,
-	IUsersRequest
+	ISignUpResponse,
 } from '../models/auth';
-import { RootState, store } from './store';
-import { useActions } from './hooks';
-import { tokenActions } from './token.slice';
+import { RootState, store } from '../store/store';
+import { useActions } from '../store/hooks';
+import { tokenActions } from '../store/token.slice';
 import { useNavigate } from 'react-router-dom';
+import { IUser, IUserInfoResponse, IUsersRequest } from '../models/user';
+import { ICreateTransactionRequest, ICreateTransactionResponse, ICreateTransactionToken } from '../models/transaction';
 
 
 const baseQuery = fetchBaseQuery({
