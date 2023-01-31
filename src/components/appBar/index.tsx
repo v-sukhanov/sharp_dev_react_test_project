@@ -9,10 +9,10 @@ import {
 	Tooltip,
 	Typography
 } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useActions } from '../../store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { useUserInfoQuery } from '../../store/protected.api';
+import { useLazyUserInfoQuery, useUserInfoQuery } from '../../store/protected.api';
 import { Menu as MenuIcon } from '@mui/icons-material';
 
 const pages = [
@@ -57,7 +57,7 @@ export const ApplicationBar = () => {
 		handleCloseUserMenu();
 	}
 
-	const { data: userInfo } = useUserInfoQuery()
+	const [getUserInfoRequest, {data: userInfo, isLoading}] = useLazyUserInfoQuery()
 	const { removeToken } = useActions();
 	const navigate = useNavigate();
 
@@ -68,6 +68,10 @@ export const ApplicationBar = () => {
 			pathname: '/auth/signin'
 		})
 	}
+
+	useEffect(() => {
+		getUserInfoRequest()
+	}, [])
 
 
 	return <AppBar position="static">
@@ -137,47 +141,50 @@ export const ApplicationBar = () => {
 					))}
 				</Box>
 
-				<Box sx={{ display: 'flex', alignItems: 'center'}}>
-					<Typography sx={{marginRight: '5px', opacity: .8}}>
-						Balance:
-					</Typography>
-					<Typography sx={{marginRight: '25px', fontWeight: 'bold'}}>
-						{userInfo?.balance} PW
-					</Typography>
-					<Box onClick={handleOpenUserMenu}  sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
-						<Tooltip title="Open settings">
-							<IconButton sx={{ p: 0 }}>
-								<Avatar alt="Remy Sharp"/>
-							</IconButton>
-						</Tooltip>
-						<Typography sx={{marginLeft: '10px'}}>
-							{userInfo?.name}
-						</Typography>
-					</Box>
+				{
+					!isLoading &&
+                    <Box sx={{ display: 'flex', alignItems: 'center'}}>
+                        <Typography sx={{marginRight: '5px', opacity: .8}}>
+                            Balance:
+                        </Typography>
+                        <Typography sx={{marginRight: '25px', fontWeight: 'bold'}}>
+							{userInfo?.balance} PW
+                        </Typography>
+                        <Box onClick={handleOpenUserMenu}  sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
+                            <Tooltip title="Open settings">
+                                <IconButton sx={{ p: 0 }}>
+                                    <Avatar alt="Remy Sharp"/>
+                                </IconButton>
+                            </Tooltip>
+                            <Typography sx={{marginLeft: '10px'}}>
+								{userInfo?.name}
+                            </Typography>
+                        </Box>
 
-					<Menu
-						sx={{ mt: '45px' }}
-						id="menu-appbar"
-						anchorEl={anchorElUser}
-						anchorOrigin={{
-							vertical: 'top',
-							horizontal: 'right',
-						}}
-						keepMounted
-						transformOrigin={{
-							vertical: 'top',
-							horizontal: 'right',
-						}}
-						open={Boolean(anchorElUser)}
-						onClose={handleCloseUserMenu}
-					>
-						{settings.map((setting) => (
-							<MenuItem key={setting} onClick={() => handleSelectUserMenu(setting)}>
-								<Typography textAlign="center">{setting}</Typography>
-							</MenuItem>
-						))}
-					</Menu>
-				</Box>
+                        <Menu
+                            sx={{ mt: '45px' }}
+                            id="menu-appbar"
+                            anchorEl={anchorElUser}
+                            anchorOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+                            keepMounted
+                            transformOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+                            open={Boolean(anchorElUser)}
+                            onClose={handleCloseUserMenu}
+                        >
+							{settings.map((setting) => (
+								<MenuItem key={setting} onClick={() => handleSelectUserMenu(setting)}>
+									<Typography textAlign="center">{setting}</Typography>
+								</MenuItem>
+							))}
+                        </Menu>
+                    </Box>
+				}
 			</Toolbar>
 		</Container>
 	</AppBar>
