@@ -1,4 +1,4 @@
-import { useLazyGetTransactionQuery } from '../../api/protected.api';
+import { useLazyGetTransactionQuery } from '../../shared/api/protected.api';
 import React, { useEffect } from 'react';
 import {
 	IconButton,

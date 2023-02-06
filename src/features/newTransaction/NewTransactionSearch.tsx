@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
-import { useLazyUsersQuery } from '../../api/protected.api';
-import { useDebounce } from '../../hooks/debounce';
-import { IUser } from '../../models/user';
+import { useLazyUsersQuery } from '../../shared/api/protected.api';
+import { useDebounce } from '../../shared/hooks/debounce';
+import { IUser } from '../../shared/models/user';
 
 export interface INewTransactionSearchProps {
 	selectUser: (user: IUser | null) => void;

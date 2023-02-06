@@ -1,10 +1,10 @@
 import React from 'react';
 import { FormControl, FormHelperText, IconButton, Input, InputAdornment, InputLabel, TextField } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { ISignUpInputProps } from './SignUpInput';
+import { IStandardInputProps } from './StandardInput';
 
 
-export const SignUpPasswordInput = ({label, error, register}: ISignUpInputProps) => {
+export const StandardPasswordInput = ({label, error, register}: IStandardInputProps) => {
 	const [showPassword, setShowPassword] = React.useState(false);
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);

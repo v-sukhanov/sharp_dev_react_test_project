@@ -1,13 +1,13 @@
-import { SignUpInput } from './SignUpInput';
+import { StandardInput } from '../../../shared/components/StandardInput';
 import React, { FormEvent, useEffect } from 'react';
 import * as yup from "yup";
 import { FieldValue, FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useLazySignUpQuery } from '../../../api/base.api';
-import { SignUpPasswordInput } from './SignUpPasswordInput';
+import { useLazySignUpQuery } from '../../../shared/api/base.api';
+import { StandardPasswordInput } from '../../../shared/components/StandardPasswordInput';
 import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
-import { useActions, useAppSelector } from '../../../store/hooks';
+import { useActions, useAppSelector } from '../../../shared/store/hooks';
 
 const signUpSchema = yup.object().shape({
 	email: yup
@@ -57,22 +57,22 @@ export const SignUp = () => {
 			<h2 className="mb-8 text-2xl">
 				Sign up
 			</h2>
-			<SignUpInput
+			<StandardInput
 				register={register('email', { required: true })}
 				label="Email"
 				error={errors?.email?.message?.toString()}
 			/>
-			<SignUpInput
+			<StandardInput
 				register={register('name', { required: true })}
 				label="Name"
 				error={errors?.name?.message?.toString()}
 			/>
-			<SignUpPasswordInput
+			<StandardPasswordInput
 				register={register('password', { required: true })}
 				label="Password"
 				error={errors?.password?.message?.toString()}
 			/>
-			<SignUpPasswordInput
+			<StandardPasswordInput
 				register={register('passwordConfirm', { required: true })}
 				label="Confirm Password"
 				error={errors?.passwordConfirm?.message?.toString()}

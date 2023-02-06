@@ -1,7 +1,7 @@
-import { useAppSelector } from './store/hooks';
+import { useAppSelector } from '../shared/store/hooks';
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { ApplicationBar } from './components/appBar';
+import { ApplicationBar } from './appBar';
 import { Box, Container } from '@mui/material';
 
 

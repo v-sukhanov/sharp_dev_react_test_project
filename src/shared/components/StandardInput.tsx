@@ -2,13 +2,13 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 import React from 'react';
 import { TextField } from '@mui/material';
 
-export interface ISignUpInputProps {
+export interface IStandardInputProps {
 	label: string;
 	error?: string;
-	register: UseFormRegisterReturn<string>;
+	register?: UseFormRegisterReturn<string>;
 }
 
-export const SignUpInput = ({label, error, register}: ISignUpInputProps) => {
+export const StandardInput = ({label, error, register}: IStandardInputProps) => {
 	return <div className="mb-4">
 		<TextField
 			{...register}

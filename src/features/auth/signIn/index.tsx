@@ -1,12 +1,12 @@
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { FormEvent, useEffect } from 'react';
-import { SignUpInput } from '../signup/SignUpInput';
+import { StandardInput } from '../../../shared/components/StandardInput';
 import * as yup from 'yup';
-import { SignUpPasswordInput } from '../signup/SignUpPasswordInput';
+import { StandardPasswordInput } from '../../../shared/components/StandardPasswordInput';
 import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
-import { useLazySignInQuery, useLazySignUpQuery } from '../../../api/base.api';
-import { useActions } from '../../../store/hooks';
+import { useLazySignInQuery, useLazySignUpQuery } from '../../../shared/api/base.api';
+import { useActions } from '../../../shared/store/hooks';
 import { useNavigate } from 'react-router-dom';
 
 const signInSchema = yup.object().shape({
@@ -50,12 +50,12 @@ export const SignIn = () => {
 			<h2 className="mb-8 text-2xl">
 				Sign in
 			</h2>
-			<SignUpInput
+			<StandardInput
 				register={register('email', { required: true })}
 				label="Email"
 				error={errors?.email?.message?.toString()}
 			/>
-			<SignUpPasswordInput
+			<StandardPasswordInput
 				register={register('password', { required: true })}
 				label="Password"
 				error={errors?.password?.message?.toString()}

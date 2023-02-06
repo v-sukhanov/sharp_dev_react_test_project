@@ -4,7 +4,7 @@ import './App.css';
 import { SignUp } from './features/auth/signup';
 import { Auth } from './features/auth';
 import { SignIn } from './features/auth/signIn';
-import { Template } from './template';
+import { Template } from './template/template';
 import { NewTransaction } from './features/newTransaction';
 import { TransactionsList } from './features/transactionsList';
 

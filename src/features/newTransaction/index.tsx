@@ -5,12 +5,13 @@ import {
 	useLazyUserInfoQuery,
 	useLazyUsersQuery,
 	useUserInfoQuery
-} from '../../api/protected.api';
+} from '../../shared/api/protected.api';
 import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
 import { NewTransactionSearch } from './NewTransactionSearch';
-import { NewTransactionAmountInput } from './NewTransactionAmountInput';
-import { useQueryParams } from '../../hooks/queryParams';
-import { IUser } from '../../models/user';
+import { OutlinedAmountInput } from '../../shared/components/OutlinedAmountInput';
+import { useQueryParams } from '../../shared/hooks/queryParams';
+import { IUser } from '../../shared/models/user';
+import { NewTransactionAlert } from './NewTransactionAlert';
 
 export const NewTransaction = () => {
 	const queryParams = useQueryParams();
@@ -87,28 +88,13 @@ export const NewTransaction = () => {
 				<Typography sx={{marginBottom: '25px'}} variant="h5">
 					{selectedUser.name}
 				</Typography>
-				<NewTransactionAmountInput initialValue={initialAmount} key={'amount_input'} amountChange={setAmount}/>
-				{
-					(userInfo?.balance ?? 0) < amount &&
-                    <Alert sx={{marginTop: '25px'}} severity="error">
-                        <AlertTitle>Error</AlertTitle>
-						The transaction amount is greater than your balance
-                    </Alert>
-				}
-				{
-					isError &&
-                    <Alert sx={{marginTop: '25px'}} severity="error">
-                        <AlertTitle>Error</AlertTitle>
-	                    {
-		                    //@ts-ignore
-		                    error?.data
-	                    }
-                    </Alert>
-				}
-				{
-					showSuccess &&
-                    <Alert sx={{marginTop: '25px'}} severity="success">The transaction has been successfully created!</Alert>
-				}
+				<OutlinedAmountInput initialValue={initialAmount} key={'amount_input'} amountChange={setAmount}/>
+				<NewTransactionAlert
+					userInfo={userInfo}
+					amount={amount}
+					showSuccess={showSuccess}
+					isError={isError}
+				></NewTransactionAlert>
                 <LoadingButton
 	                loading={isLoading}
 	                disabled={amount < 1 || (userInfo?.balance ?? 0) < amount}
