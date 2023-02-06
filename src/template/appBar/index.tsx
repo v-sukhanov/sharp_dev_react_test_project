@@ -12,8 +12,8 @@ import {
 import React, { useEffect } from 'react';
 import { useActions } from '../../shared/store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { useLazyUserInfoQuery, useUserInfoQuery } from '../../shared/api/protected.api';
 import { Menu as MenuIcon } from '@mui/icons-material';
+import { useLazyUserInfoQuery } from '../../shared/api/endpoints/user.endpoints';
 
 const pages = [
 	{

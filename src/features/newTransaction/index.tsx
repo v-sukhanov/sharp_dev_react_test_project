@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Autocomplete, TextField, Typography } from '@mui/material';
-import {
-	useLazyCreateTransactionQuery,
-	useLazyUserInfoQuery,
-	useLazyUsersQuery,
-	useUserInfoQuery
-} from '../../shared/api/protected.api';
-import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
+import { Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { NewTransactionSearch } from './NewTransactionSearch';
 import { OutlinedAmountInput } from '../../shared/components/OutlinedAmountInput';
 import { useQueryParams } from '../../shared/hooks/queryParams';
 import { IUser } from '../../shared/models/user';
 import { NewTransactionAlert } from './NewTransactionAlert';
+import { useLazyUserInfoQuery, useUserInfoQuery } from '../../shared/api/endpoints/user.endpoints';
+import { useLazyCreateTransactionQuery, useLazyUsersQuery } from '../../shared/api/endpoints/transaction.endpoints';
 
 export const NewTransaction = () => {
 	const queryParams = useQueryParams();

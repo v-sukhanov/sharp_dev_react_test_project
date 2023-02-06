@@ -1,4 +1,3 @@
-import { useLazyGetTransactionQuery } from '../../shared/api/protected.api';
 import React, { useEffect } from 'react';
 import {
 	IconButton,
@@ -12,6 +11,7 @@ import {
 } from '@mui/material';
 import { Replay } from '@mui/icons-material';
 import { createSearchParams, useNavigate } from 'react-router-dom';
+import { useLazyGetTransactionQuery } from '../../shared/api/endpoints/transaction.endpoints';
 
 
 export const TransactionsList = () => {

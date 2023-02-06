@@ -3,11 +3,11 @@ import React, { FormEvent, useEffect } from 'react';
 import * as yup from "yup";
 import { FieldValue, FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useLazySignUpQuery } from '../../../shared/api/base.api';
 import { StandardPasswordInput } from '../../../shared/components/StandardPasswordInput';
 import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
 import { useActions, useAppSelector } from '../../../shared/store/hooks';
+import { useLazySignUpQuery } from '../../../shared/api/endpoints/auth.endpoints';
 
 const signUpSchema = yup.object().shape({
 	email: yup

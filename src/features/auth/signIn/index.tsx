@@ -5,9 +5,9 @@ import { StandardInput } from '../../../shared/components/StandardInput';
 import * as yup from 'yup';
 import { StandardPasswordInput } from '../../../shared/components/StandardPasswordInput';
 import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
-import { useLazySignInQuery, useLazySignUpQuery } from '../../../shared/api/base.api';
 import { useActions } from '../../../shared/store/hooks';
 import { useNavigate } from 'react-router-dom';
+import { useLazySignInQuery } from '../../../shared/api/endpoints/auth.endpoints';
 
 const signInSchema = yup.object().shape({
 	email: yup

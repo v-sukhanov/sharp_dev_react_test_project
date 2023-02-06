@@ -2,17 +2,14 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { baseApi } from '../api/base.api';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { tokenReducer } from './token.slice';
-import { protectedApi } from '../api/protected.api';
 
 export const store = configureStore({
 	reducer: {
 		[baseApi.reducerPath]: baseApi.reducer,
-		[protectedApi.reducerPath]: protectedApi.reducer,
 		token: tokenReducer
 	},
 	middleware: getDefaultMiddleware => getDefaultMiddleware().concat([
 		baseApi.middleware,
-		protectedApi.middleware
 	])
 });
 
